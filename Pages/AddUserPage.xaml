@@ -1,0 +1,63 @@
+﻿<Page x:Class="LearningWPF_Permission.Pages.AddUserPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LearningWPF_Permission.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddUserPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.2*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1">
+            <TextBlock
+                Style="{StaticResource textBlockStyle1}"
+                Text="All users: "></TextBlock>
+            <ListView 
+                x:Name="usersListView"
+                Height="auto"
+                MaxHeight="225"
+                ItemTemplate="{StaticResource userCollectionDataTemplate}"
+                >
+            </ListView>
+            <Button               
+                Style="{StaticResource buttonStyle2}"
+                Width="240"
+                Content="Check selected user permissions"
+                Command="{Binding CheckSelectedUserPermissionsCommand}"
+                CommandParameter="{Binding ElementName=usersListView, Path=SelectedItem}"
+                ></Button>
+            <TextBlock 
+                Grid.Column="1"
+                Grid.Row="1"
+                TextWrapping="WrapWithOverflow"
+                Text="{Binding UserPermissionsText}"
+                Style="{StaticResource textBlockStyle2}"
+                       >
+            </TextBlock>
+        </StackPanel>
+        <Border 
+            BorderThickness="5"
+            BorderBrush="Black">
+            <StackPanel VerticalAlignment="Top">
+                <TextBlock Style="{StaticResource textBlockStyle1}" Text="User name: "></TextBlock>
+                <TextBox Text="{Binding UserModel.Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBlock Style="{StaticResource textBlockStyle1}" Text="User surname: "></TextBlock>
+                <TextBox Text="{Binding UserModel.Surname, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBlock Style="{StaticResource textBlockStyle1}" Text="User area: "></TextBlock>
+                <TextBox Text="{Binding UserModel.Area, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBlock Style="{StaticResource textBlockStyle1}" Text="User position: "></TextBlock>
+                <TextBox Text="{Binding UserModel.Position, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <Button Grid.Column="0"
+                Style="{StaticResource buttonStyle2}"
+                Content="Add user"
+                Command="{Binding AddUserToDBCommand}"
+                ></Button>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

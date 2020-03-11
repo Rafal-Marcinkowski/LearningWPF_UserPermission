@@ -1,0 +1,62 @@
+﻿<Page x:Class="LearningWPF_Permission.Pages.PermitUserPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LearningWPF_Permission.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PermitUserPage">
+
+    <StackPanel>
+        <TextBlock 
+                Text="List of filegroups: "
+                Style="{StaticResource textBlockStyle1}"
+                ></TextBlock>
+        <ListView
+            Height="auto"
+            MaxHeight="140"
+            x:Name="filegroupList">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding FileGroupName}"></TextBlock>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Currently selected user: "
+                       Style="{StaticResource textBlockStyle2}"
+                       ></TextBlock>
+            <TextBlock Text="{Binding UserModel.Name}"
+                       FontSize="13"
+                       Foreground="Green"
+                       FontWeight="Bold"
+                       ></TextBlock>
+            <TextBlock Text=" "></TextBlock>
+            <TextBlock Text="{Binding UserModel.Surname}"
+                       FontSize="13"
+                       Foreground="Green"
+                       FontWeight="Bold"
+                       ></TextBlock>
+        </StackPanel>
+        <Button  
+                Width="125"  
+                Height="45"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Center"
+                Style="{StaticResource buttonStyle1}"              
+                Content="Permit user"
+                Command="{Binding PermitUserCommand}"
+                CommandParameter="{Binding ElementName=filegroupList, Path=SelectedItem}"
+                />
+        <Button
+                Grid.Row="2"
+                Width="255"
+                Height="50"           
+                Style="{StaticResource buttonStyle1}"
+                Content="Delete user permission"
+                Command="{Binding DeleteUserPermissionCommand}"
+                CommandParameter="{Binding ElementName=filegroupList, Path=SelectedItem}"
+              ></Button>
+    </StackPanel>
+</Page>
